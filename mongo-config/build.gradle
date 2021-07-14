@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api "org.jetbrains:annotations:${jetbrains_annotations_version}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
+    api "org.mongodb:mongodb-driver-sync:${mongodb_version}"
+    api "com.squareup.moshi:moshi:${moshi_version}"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:${moshi_version}"
+    implementation "com.squareup.okio:okio:${okio_version}"
+    implementation "io.github.microutils:kotlin-logging:${kotlin_logging_version}"
+    implementation "org.apache.commons:commons-lang3:${commons_lang_version}"
+    implementation "org.slf4j:slf4j-api:${slf4j_version}"
+}

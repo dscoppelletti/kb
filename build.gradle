@@ -1,0 +1,35 @@
+
+buildscript {
+    ext.aws_version = '2.15.15'
+    ext.commons_codec_version = '1.15'
+    ext.commons_io_version = '2.10.0'
+    ext.commons_lang_version = '3.12.0'
+    ext.dagger_version = '2.35.1'
+    ext.javax_inject_version = '1'
+    ext.jetbrains_annotations_version = '20.1.0'
+//    ext.junit_version = '5.7.0'
+    ext.kotlin_logging_version = '1.12.5'
+    ext.kotlin_version = '1.5.0'
+    ext.logback_version = '1.2.3'
+    ext.mongodb_version = '4.2.3'
+    ext.moshi_version = '1.12.0'
+    ext.okio_version = '2.10.0'
+    ext.slf4j_version = '1.7.30'
+
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}"
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}

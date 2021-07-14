@@ -1,0 +1,50 @@
+plugins {
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+apply plugin: 'kotlin-kapt'
+
+group 'it.scoppelletti.kb'
+version '1.0.0'
+description 'Knowledge Base'
+archivesBaseName = 'kb'
+mainClassName = 'it.scoppelletti.kb.app.MainApp'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls' ]
+}
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':database')
+    implementation project(':storage')
+    implementation "com.google.dagger:dagger:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+    implementation "commons-codec:commons-codec:${commons_codec_version}"
+    implementation "commons-io:commons-io:${commons_io_version}"
+    implementation "javax.inject:javax.inject:${javax_inject_version}"
+    implementation "org.slf4j:slf4j-api:${slf4j_version}"
+    runtimeOnly "ch.qos.logback:logback-core:${logback_version}"
+    runtimeOnly "ch.qos.logback:logback-classic:${logback_version}"
+//    testImplementation "org.junit.jupiter:junit-jupiter-api:${junit_version}"
+//    testImplementation "org.jetbrains.kotlin:kotlin-test:${kotlin_version}"
+//    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:${kotlin_version}"
+//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit_version}"
+}
+
+//test {
+//    useJUnitPlatform()
+//}

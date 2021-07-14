@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+apply plugin: 'kotlin-kapt'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+
+configurations {
+    bom
+    api.extendsFrom(bom)
+}
+
+dependencies {
+    bom platform("software.amazon.awssdk:bom:${aws_version}")
+    api project(':domain')
+    api "com.google.dagger:dagger:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+    api "javax.inject:javax.inject:${javax_inject_version}"
+    api "org.jetbrains:annotations:${jetbrains_annotations_version}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
+    api 'software.amazon.awssdk:s3'
+    implementation "io.github.microutils:kotlin-logging:${kotlin_logging_version}"
+    implementation "org.apache.commons:commons-lang3:${commons_lang_version}"
+    implementation "org.slf4j:slf4j-api:${slf4j_version}"
+}

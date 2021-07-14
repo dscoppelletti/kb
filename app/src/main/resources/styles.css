@@ -1,0 +1,11 @@
+.form {
+    -fx-padding: 10;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}
+.pagination {
+    -fx-padding: 0 0 10 0;
+}
+.table {
+    -fx-padding: 0 10 0 10;
+}
