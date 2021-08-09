@@ -206,16 +206,15 @@ class MainSceneBuilder @Inject constructor(
         }
 
         with(pager) {
-            pageCount = viewModel.page.pageCount
             userData = this
 
             try {
+                pageCount = viewModel.page.pageCount
+                maxPageIndicatorCount = 5
                 currentPageIndex = pageIdx
             } finally {
                 userData = null
             }
-
-            maxPageIndicatorCount = 5
         }
     }
 }
