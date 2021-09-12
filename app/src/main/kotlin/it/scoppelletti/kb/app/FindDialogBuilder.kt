@@ -20,6 +20,7 @@ package it.scoppelletti.kb.app
 
 import it.scoppelletti.kb.app.i18n.AppMessages
 import it.scoppelletti.kb.app.model.FindForm
+import javafx.beans.InvalidationListener
 import javafx.beans.value.ChangeListener
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Dialog
@@ -51,15 +52,41 @@ class FindDialogBuilder @Inject constructor(
                 FindDialogBuilder.intConverter)
         }
 
-        val txtTags = TextField().apply {
-            textProperty().bindBidirectional(form.tagsEditProperty())
+        val txtAuthors = TextField().apply {
+            textProperty().bindBidirectional(form.authorsEditProperty())
+        }
+
+        val txtPublishedDateMin = TextField().apply {
+            textProperty().bindBidirectional(
+                form.publishedDateMinEditProperty())
+        }
+
+        val txtPublishedDateMax = TextField().apply {
+            textProperty().bindBidirectional(
+                form.publishedDateMaxEditProperty())
+        }
+
+        val txtRequiredTags = TextField().apply {
+            textProperty().bindBidirectional(form.requiredTagsEditProperty())
+        }
+
+        val txtOptionalTags = TextField().apply {
+            textProperty().bindBidirectional(form.optionalTagsEditProperty())
         }
 
         val grid = GridPane().apply {
             add(Label(appMessages.labelPageSize()), 0, 0, 1, 1)
             add(txtPageSize, 1, 0, 1, 1)
-            add(Label(appMessages.labelTags()), 0, 1, 1, 1)
-            add(txtTags, 1, 1, 1, 1)
+            add(Label(appMessages.labelAuthors()), 0, 1, 1, 1)
+            add(txtAuthors, 1, 1, 1, 1)
+            add(Label(appMessages.labelPublishedDateMin()), 0, 2, 1, 1)
+            add(txtPublishedDateMin, 1, 2, 1, 1)
+            add(Label(appMessages.labelPublishedDateMax()), 0, 3, 1, 1)
+            add(txtPublishedDateMax, 1, 3, 1, 1)
+            add(Label(appMessages.labelRequiredTags()), 0, 4, 1, 1)
+            add(txtRequiredTags, 1, 4, 1, 1)
+            add(Label(appMessages.labelOptionalTags()), 0, 5, 1, 1)
+            add(txtOptionalTags, 1, 5, 1, 1)
             styleClass.add("form")
         }
 
@@ -73,12 +100,26 @@ class FindDialogBuilder @Inject constructor(
             isDisable = !form.validate()
         }
 
-        val validator = ChangeListener<Any>() { _, _, _ ->
+        val validator = ChangeListener<Any?> { _, _, _ ->
             cmdOK.isDisable = !form.validate()
         }
 
         form.pageSizeProperty().addListener(validator)
-        form.tagsProperty().addListener(validator)
+        form.authorsProperty().addListener(validator)
+        form.publishedDateMinProperty().addListener(validator)
+
+        form.publishedDateMinEditProperty().addListener(InvalidationListener {
+            cmdOK.isDisable = !form.publishedDateMinEdit.isNullOrBlank()
+        })
+
+        form.publishedDateMaxProperty().addListener(validator)
+
+        form.publishedDateMaxEditProperty().addListener(InvalidationListener {
+            cmdOK.isDisable = !form.publishedDateMaxEdit.isNullOrBlank()
+        })
+
+        form.requiredTagsProperty().addListener(validator)
+        form.optionalTagsProperty().addListener(validator)
 
         dlg.setResultConverter { buttonType ->
             if (buttonType == ButtonType.OK) form else null

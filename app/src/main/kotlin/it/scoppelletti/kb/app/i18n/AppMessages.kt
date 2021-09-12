@@ -63,11 +63,19 @@ class AppMessages @Inject constructor() {
 
     fun labelFile(): String = res.getString("lbl.file")
 
+    fun labelOptionalTags(): String = res.getString("lbl.optionalTags")
+
     fun labelPageSize(): String = res.getString("lbl.pageSize")
 
     fun labelPublishedDate(): String = res.getString("lbl.publishedDate")
 
+    fun labelPublishedDateMax(): String = res.getString("lbl.publishedDateMax")
+
+    fun labelPublishedDateMin(): String = res.getString("lbl.publishedDateMin")
+
     fun labelRemark(): String = res.getString("lbl.remark")
+
+    fun labelRequiredTags(): String = res.getString("lbl.requiredTags")
 
     fun labelTags(): String = res.getString("lbl.tags")
 

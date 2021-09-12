@@ -16,6 +16,12 @@
 
 package it.scoppelletti.kb.domain.model
 
+import java.time.LocalDate
+
 data class ArticleFindModel(
-    val tags: List<String>
+    val authors: List<String>,
+    val publishedDateMin: LocalDate?,
+    val publishedDateMax: LocalDate?,
+    val optionalTags: List<String>,
+    val requiredTags: List<String>
 )

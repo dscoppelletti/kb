@@ -19,7 +19,12 @@ package it.scoppelletti.kb.database
 import com.mongodb.MongoException
 import javax.inject.Inject
 import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.*
+import com.mongodb.client.model.Aggregates
+import com.mongodb.client.model.Field
+import com.mongodb.client.model.Filters
+import com.mongodb.client.model.FindOneAndReplaceOptions
+import com.mongodb.client.model.ReturnDocument
+import com.mongodb.client.model.Sorts
 import it.scoppelletti.kb.domain.ArticleUseCase
 import it.scoppelletti.kb.domain.model.PageRequest
 import it.scoppelletti.kb.domain.model.ArticleModel
@@ -28,6 +33,7 @@ import it.scoppelletti.kb.domain.model.ArticleFindModel
 import it.scoppelletti.kb.domain.model.Page
 import mu.KotlinLogging
 import org.bson.Document
+import org.bson.conversions.Bson
 import org.bson.types.ObjectId
 
 class ArticleUseCaseImpl @Inject constructor(
@@ -83,19 +89,38 @@ class ArticleUseCaseImpl @Inject constructor(
         val articles =
             db.getCollection(ArticleData.Collection, ArticleData::class.java)
 
-        val filter = if (findModel.tags.isEmpty()) Document() else
-            Filters.`in`("tags", findModel.tags)
+        val filters = mutableListOf<Bson>()
+        if (findModel.authors.isNotEmpty()) {
+            filters.add(Filters.`in`("authors", findModel.authors))
+        }
+        findModel.publishedDateMin?.let {
+            filters.add(Filters.gte("publishedDate", it))
+        }
+        findModel.publishedDateMax?.let {
+            filters.add(Filters.lte("publishedDate", it))
+        }
+        if (findModel.requiredTags.isNotEmpty()) {
+            filters.add(Filters.all("tags", findModel.requiredTags))
+        }
 
+        val filter = if (filters.isEmpty()) Document() else Filters.and(filters)
         val itemCount = articles.countDocuments(filter)
 
         val pipeline = listOf(
             Aggregates.match(filter),
-            Aggregates.addFields(Field("score", Document("\$size",
-                Document("\$setIntersection",
-                    listOf("\$tags", findModel.tags))))),
-            Aggregates.sort(Sorts.orderBy(Sorts.descending("score"),
-                Sorts.descending("publishedDate"), Sorts.ascending("title"),
-                Sorts.ascending("id"))),
+            Aggregates.addFields(
+                Field("authorScore", Document("\$size",
+                    Document("\$setIntersection",
+                        listOf("\$authors", findModel.authors)))),
+                Field("tagScore", Document("\$size",
+                    Document("\$setIntersection",
+                        listOf("\$tags", findModel.optionalTags))))
+            ),
+            Aggregates.sort(
+                Sorts.orderBy(Sorts.descending("authorScore"),
+                    Sorts.descending("tagScore"),
+                    Sorts.descending("publishedDate"), Sorts.ascending("title"),
+                    Sorts.ascending("id"))),
             Aggregates.skip(pageReq.skip),
             Aggregates.limit(pageReq.pageSize))
 

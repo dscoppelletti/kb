@@ -51,9 +51,9 @@ class ArticleForm {
         _remark.addListener(this::onChanged)
         _tags.addListener(this::onChanged)
 
+        _authorsEdit.bindBidirectional(_authors, AuthorListStringConverter)
         _publishedDateEdit.bindBidirectional(_publishedDate,
             LocalDateStringConverter(FormatStyle.SHORT))
-        _authorsEdit.bindBidirectional(_authors, AuthorListStringConverter)
         _tagsEdit.bindBidirectional(_tags, TagListStringConverter)
     }
 
