@@ -19,10 +19,21 @@ package it.scoppelletti.kb.app
 import it.scoppelletti.kb.app.i18n.AppMessages
 import it.scoppelletti.kb.app.model.ArticleForm
 import javafx.scene.Scene
-import javafx.scene.control.*
+import javafx.scene.control.ButtonType
+import javafx.scene.control.Label
+import javafx.scene.control.Menu
+import javafx.scene.control.MenuBar
+import javafx.scene.control.MenuItem
+import javafx.scene.control.SeparatorMenuItem
+import javafx.scene.control.TextArea
+import javafx.scene.control.TextField
 import javafx.scene.layout.GridPane
 import javafx.scene.layout.VBox
-import javafx.stage.*
+import javafx.stage.FileChooser
+import javafx.stage.Modality
+import javafx.stage.Stage
+import javafx.stage.StageStyle
+import javafx.stage.WindowEvent
 import javax.inject.Inject
 
 class ArticleStageBuilder @Inject constructor(

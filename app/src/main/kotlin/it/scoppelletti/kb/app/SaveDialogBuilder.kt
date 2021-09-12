@@ -17,7 +17,8 @@
 package it.scoppelletti.kb.app
 
 import it.scoppelletti.kb.app.i18n.AppMessages
-import javafx.scene.control.*
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
 import javax.inject.Inject
 
 class SaveDialogBuilder @Inject constructor(

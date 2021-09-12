@@ -19,14 +19,21 @@ package it.scoppelletti.kb.app.model
 import it.scoppelletti.kb.app.adapter.AuthorListStringConverter
 import it.scoppelletti.kb.app.adapter.TagListStringConverter
 import it.scoppelletti.kb.app.i18n.AppMessages
-import javafx.collections.ObservableList
-import javafx.util.converter.LocalDateStringConverter
 import it.scoppelletti.kb.domain.model.ArticleModel
 import java.time.LocalDate
 import java.time.format.FormatStyle
-import javafx.beans.property.*
+import javafx.beans.property.BooleanProperty
+import javafx.beans.property.ListProperty
+import javafx.beans.property.ObjectProperty
+import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.property.SimpleListProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableValue
 import javafx.collections.FXCollections
+import javafx.collections.ObservableList
+import javafx.util.converter.LocalDateStringConverter
 
 class ArticleForm {
 

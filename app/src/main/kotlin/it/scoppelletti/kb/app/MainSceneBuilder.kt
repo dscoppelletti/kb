@@ -20,12 +20,18 @@ import it.scoppelletti.kb.app.i18n.AppMessages
 import it.scoppelletti.kb.app.model.ArticleForm
 import it.scoppelletti.kb.app.model.FindForm
 import it.scoppelletti.kb.domain.model.PageRequest
-import java.lang.Exception
 import java.time.LocalDate
 import javafx.scene.Scene
-import javafx.scene.control.*
+import javafx.scene.control.Menu
+import javafx.scene.control.MenuBar
+import javafx.scene.control.MenuItem
+import javafx.scene.control.Pagination
+import javafx.scene.control.TableColumn
+import javafx.scene.control.TableRow
+import javafx.scene.control.TableView
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 import javax.inject.Inject
@@ -55,9 +61,14 @@ class MainSceneBuilder @Inject constructor(
             }
         }
 
-        val vBox = VBox(menuBar, HBox(table).apply {
+        val tableBox = HBox(table).apply {
             styleClass.add("table")
-        }, pager)
+        }
+
+        HBox.setHgrow(table, Priority.ALWAYS)
+
+        val vBox = VBox(menuBar, tableBox, pager)
+        VBox.setVgrow(tableBox, Priority.ALWAYS)
 
         return Scene(vBox).apply {
             stylesheets.add("styles.css")

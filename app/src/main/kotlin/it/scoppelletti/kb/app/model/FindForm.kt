@@ -21,7 +21,14 @@ import it.scoppelletti.kb.app.adapter.TagListStringConverter
 import it.scoppelletti.kb.domain.model.ArticleFindModel
 import java.time.LocalDate
 import java.time.format.FormatStyle
-import javafx.beans.property.*
+import javafx.beans.property.IntegerProperty
+import javafx.beans.property.ListProperty
+import javafx.beans.property.ObjectProperty
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleListProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.StringProperty
 import javafx.collections.ObservableList
 import javafx.util.converter.LocalDateStringConverter
 
