@@ -59,8 +59,13 @@ abstract class KbDatabaseModule {
                 )
             )
 
+//            val serverApi = ServerApi.builder()
+//                .version(ServerApiVersion.V1)
+//                .build()
+
             val settings = MongoClientSettings.builder()
                 .applyConfig(config)
+//                .serverApi(serverApi)
                 .writeConcern(WriteConcern.W1
                     .withWTimeout(2500, TimeUnit.MILLISECONDS))
                 .codecRegistry(codecRegistry)
