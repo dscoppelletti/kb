@@ -1,0 +1,41 @@
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      'title',
+      'authors',
+      'publishedDate',
+      'url',
+      'tags'
+    ],
+    properties: {
+      url: {
+        bsonType: 'string'
+      },
+      file: {
+        bsonType: 'string'
+      },
+      remark: {
+        bsonType: 'string'
+      },
+      tags: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'string'
+        }
+      },
+      title: {
+        bsonType: 'string'
+      },
+      authors: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'string'
+        }
+      },
+      publishedDate: {
+        bsonType: 'date'
+      }
+    }
+  }
+}
