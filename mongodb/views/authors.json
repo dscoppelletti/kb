@@ -1,0 +1,10 @@
+[{$project: {
+  _id: 0,
+  authors: 1
+}}, {$unwind: {
+  path: '$authors'
+}}, {$group: {
+  _id: '$authors'
+}}, {$sort: {
+  _id: 1
+}}]
