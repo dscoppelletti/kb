@@ -22,15 +22,19 @@ import java.io.StringWriter
 import javafx.scene.control.Alert
 import javafx.scene.control.TextArea
 import javax.inject.Inject
+import mu.KotlinLogging
 
 class ExceptionDialogBuilder @Inject constructor(
     private val appMessages: AppMessages
 ) {
 
+    private val logger = KotlinLogging.logger { }
+
     fun build(ex: Throwable, title: String? = null): Alert {
+        logger.error(ex) { "UI failed."}
+        
         val buf = StringWriter()
         val writer = PrintWriter(buf)
-
         ex.printStackTrace(writer)
 
         val textArea = TextArea(buf.toString()).apply {

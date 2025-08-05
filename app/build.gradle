@@ -36,6 +36,7 @@ dependencies {
     implementation "commons-codec:commons-codec:${commons_codec_version}"
     implementation "commons-io:commons-io:${commons_io_version}"
     implementation "javax.inject:javax.inject:${javax_inject_version}"
+    implementation "io.github.microutils:kotlin-logging:${kotlin_logging_version}"
     implementation "org.slf4j:slf4j-api:${slf4j_version}"
     runtimeOnly "ch.qos.logback:logback-core:${logback_version}"
     runtimeOnly "ch.qos.logback:logback-classic:${logback_version}"
