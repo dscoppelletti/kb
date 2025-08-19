@@ -20,3 +20,9 @@ Thumbs.db
 # Mac
 .DS_Store
 
+# Docker
+docker/.env
+docker/data/
+docker/mongo.json
+docker/run.sh
+

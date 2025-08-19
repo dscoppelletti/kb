@@ -5,7 +5,7 @@ The configuration parameters for accessing MongoDB are loaded from a JSON file:
 
 ```
 {
-    "uri" : "mongodb+srv://localhost",
+    "uri" : "mongodb://localhost",
     "userName" : "dario",
     "password" : "********",
     "database" : "kb"
